@@ -1,60 +1,28 @@
-const CACHE_NAME = 'cake-party-v1'
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json'
-]
+const CACHE = 'cake-party-v2';
+const SHELL = ['/', '/index.html', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
-      .then(() => self.skipWaiting())
-  )
-})
+self.addEventListener('install', (e) => {
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
+});
 
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName)
-          }
-        })
-      )
-    }).then(() => self.clients.claim())
-  )
-})
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
+});
 
-self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') {
-    return
-  }
-
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response
-        }
-
-        return fetch(event.request).then(response => {
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response
-          }
-
-          const responseToCache = response.clone()
-          caches.open(CACHE_NAME)
-            .then(cache => {
-              cache.put(event.request, responseToCache)
-            })
-
-          return response
-        })
+self.addEventListener('fetch', (e) => {
+  const url = new URL(e.request.url);
+  if (e.request.method !== 'GET') return;
+  if (url.origin !== self.location.origin) return;
+  e.respondWith(
+    fetch(e.request)
+      .then((res) => {
+        const copy = res.clone();
+        caches.open(CACHE).then((c) => c.put(e.request, copy));
+        return res;
       })
-      .catch(() => {
-        return new Response('Offline - cached version not available')
-      })
-  )
-})
+      .catch(() => caches.match(e.request).then((r) => r || caches.match('/index.html')))
+  );
+});

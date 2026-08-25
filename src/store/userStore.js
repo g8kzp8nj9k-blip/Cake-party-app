@@ -1,34 +1,14 @@
 import { create } from 'zustand'
-import { supabase } from '../config/supabase'
+import { getGuestId } from '../lib/identity'
+
+const NAME_KEY = 'cakeparty.name'
 
 export const useUserStore = create((set) => ({
-  user: null,
-  userName: localStorage.getItem('userName') || '',
-  loading: true,
-  
-  setUserName: (name) => {
-    localStorage.setItem('userName', name)
-    set({ userName: name })
-  },
-  
-  initAuth: async () => {
-    try {
-      const { data, error } = await supabase.auth.getSession()
-      
-      if (error) throw error
-      
-      if (!data.session) {
-        const { data: signUpData, error: signUpError } = await supabase.auth.signInAnonymously()
-        if (signUpError) throw signUpError
-        set({ user: signUpData.user })
-      } else {
-        set({ user: data.session.user })
-      }
-    } catch (error) {
-      console.error('Auth error:', error)
-      set({ user: { id: 'anonymous-' + Date.now() } })
-    } finally {
-      set({ loading: false })
-    }
+  guestId: getGuestId(),
+  name: (() => { try { return localStorage.getItem(NAME_KEY) || '' } catch { return '' } })(),
+  setName: (name) => {
+    const clean = name.trim().slice(0, 30)
+    try { localStorage.setItem(NAME_KEY, clean) } catch {}
+    set({ name: clean })
   }
 }))

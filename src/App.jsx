@@ -1,84 +1,68 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useUserStore } from './store/userStore'
-import Questionnaire from './components/Questionnaire'
-import PhotoUpload from './components/PhotoUpload'
+import Questions from './components/Questions'
+import MyCake from './components/MyCake'
 import Gallery from './components/Gallery'
 import './App.css'
 
+const TABS = [
+  { id: 'questions', label: 'Questions' },
+  { id: 'cake', label: 'My cake' },
+  { id: 'gallery', label: 'The table' }
+]
+
 export default function App() {
-  const [activeTab, setActiveTab] = useState('questions')
-  const [userName, setNameInput] = useState('')
-  const { userName: storedName, setUserName, initAuth, loading } = useUserStore()
+  const [tab, setTab] = useState('questions')
+  const { name, setName } = useUserStore()
+  const [draft, setDraft] = useState(name)
 
-  useEffect(() => {
-    initAuth()
-    setNameInput(storedName)
-  }, [])
-
-  if (loading) {
-    return <div className="loading">Loading your party...</div>
-  }
-
-  const handleNameSave = () => {
-    if (userName.trim()) {
-      setUserName(userName)
-    }
-  }
+  const commit = () => setName(draft)
 
   return (
     <div className="app">
-      <div className="header">
-        <h1>🍰 Cake Party</h1>
-        <p>Design • Share • Celebrate</p>
+      <div className="ticker">
+        <span>No. 01 · Mini cakes</span>
+        <span>Not a competition</span>
       </div>
 
-      <div className="container">
-        <div className="name-section">
-          <input
-            type="text"
-            placeholder="What's your name?"
-            value={userName}
-            onChange={(e) => setNameInput(e.target.value)}
-            onBlur={handleNameSave}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') handleNameSave()
-            }}
-            maxLength={30}
-          />
-          {storedName && <p className="name-saved">✓ {storedName}</p>}
-        </div>
+      <header className="masthead">
+        <h1>Cake<em>Party</em></h1>
+        <p>We meet · we hang · we decorate</p>
+      </header>
 
-        <div className="tabs">
-          <button
-            className={`tab-btn ${activeTab === 'questions' ? 'active' : ''}`}
-            onClick={() => setActiveTab('questions')}
-          >
-            Questions
-          </button>
-          <button
-            className={`tab-btn ${activeTab === 'cake' ? 'active' : ''}`}
-            onClick={() => setActiveTab('cake')}
-          >
-            My Cake
-          </button>
-          <button
-            className={`tab-btn ${activeTab === 'gallery' ? 'active' : ''}`}
-            onClick={() => setActiveTab('gallery')}
-          >
-            Gallery
-          </button>
-        </div>
-
-        <div className="tab-content">
-          {activeTab === 'questions' && <Questionnaire />}
-          {activeTab === 'cake' && <PhotoUpload />}
-          {activeTab === 'gallery' && <Gallery />}
-        </div>
+      <div className="guestbook">
+        <label htmlFor="guest">Sign the guest book</label>
+        <input
+          id="guest"
+          value={draft}
+          placeholder="your name"
+          maxLength={30}
+          onChange={(e) => setDraft(e.target.value)}
+          onBlur={commit}
+          onKeyDown={(e) => { if (e.key === 'Enter') { commit(); e.currentTarget.blur() } }}
+        />
       </div>
 
-      <footer className="footer">
-        <p>Made with 💕 for your cake party</p>
-      </footer>
+      <main>
+        {tab === 'questions' && <Questions />}
+        {tab === 'cake' && <MyCake />}
+        {tab === 'gallery' && <Gallery />}
+      </main>
+
+      <footer className="rule">Bring your favourite bottle</footer>
+
+      <nav className="nav">
+        {TABS.map((t) => (
+          <button
+            key={t.id}
+            className={tab === t.id ? 'on' : ''}
+            onClick={() => setTab(t.id)}
+            aria-current={tab === t.id ? 'page' : undefined}
+          >
+            {t.label}
+          </button>
+        ))}
+      </nav>
     </div>
   )
 }

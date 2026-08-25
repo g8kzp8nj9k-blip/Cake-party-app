@@ -1,30 +1,52 @@
--- Create tables for Cake Party App
+-- Cake Party — run this whole file in Supabase → SQL Editor → New query → Run.
+-- Safe to re-run: it drops and recreates.
 
--- Questionnaires table
-CREATE TABLE questionnaires (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id TEXT NOT NULL,
-  user_name TEXT NOT NULL,
-  responses JSONB NOT NULL,
-  created_at TIMESTAMP DEFAULT now(),
-  updated_at TIMESTAMP DEFAULT now(),
-  UNIQUE(user_id)
+drop table if exists answers cascade;
+drop table if exists cakes cascade;
+
+create table answers (
+  guest_id   text primary key,
+  name       text not null,
+  responses  jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
 
--- Cakes table
-CREATE TABLE cakes (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id TEXT NOT NULL,
-  user_name TEXT NOT NULL,
-  cake_photo_url TEXT NOT NULL,
-  decor_photo_url TEXT,
-  ai_suggestions JSONB,
-  has_ai_suggestions BOOLEAN DEFAULT false,
-  created_at TIMESTAMP DEFAULT now()
+create table cakes (
+  guest_id     text primary key,
+  name         text not null,
+  cake_url     text not null,
+  decor_url    text,
+  ai_ideas     text,
+  ai_roast     text,
+  created_at   timestamptz not null default now(),
+  updated_at   timestamptz not null default now()
 );
 
--- Create indexes for faster queries
-CREATE INDEX idx_questionnaires_user_id ON questionnaires(user_id);
-CREATE INDEX idx_questionnaires_created_at ON questionnaires(created_at DESC);
-CREATE INDEX idx_cakes_user_id ON cakes(user_id);
-CREATE INDEX idx_cakes_created_at ON cakes(created_at DESC);
+create index on answers (updated_at desc);
+create index on cakes (updated_at desc);
+
+-- This is a private party link, so everyone may read and write.
+alter table answers enable row level security;
+alter table cakes   enable row level security;
+
+create policy "party guests read answers"  on answers for select using (true);
+create policy "party guests write answers" on answers for insert with check (true);
+create policy "party guests edit answers"  on answers for update using (true) with check (true);
+
+create policy "party guests read cakes"  on cakes for select using (true);
+create policy "party guests write cakes" on cakes for insert with check (true);
+create policy "party guests edit cakes"  on cakes for update using (true) with check (true);
+
+-- Photo storage
+insert into storage.buckets (id, name, public)
+values ('cakes', 'cakes', true)
+on conflict (id) do update set public = true;
+
+drop policy if exists "cake photos readable"   on storage.objects;
+drop policy if exists "cake photos uploadable" on storage.objects;
+drop policy if exists "cake photos updatable"  on storage.objects;
+
+create policy "cake photos readable"   on storage.objects for select using (bucket_id = 'cakes');
+create policy "cake photos uploadable" on storage.objects for insert with check (bucket_id = 'cakes');
+create policy "cake photos updatable"  on storage.objects for update using (bucket_id = 'cakes');

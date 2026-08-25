@@ -1,183 +1,85 @@
-.gallery {
-  padding: 16px;
-}
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-.gallery h2 {
-  font-size: 24px;
-  margin-bottom: 8px;
-  color: var(--primary);
-}
-
-.gallery .subtitle {
-  color: #666;
-  margin: 0;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 32px 16px;
-}
-
-.empty-state p {
-  font-size: 16px;
-  color: #999;
-  margin: 8px 0;
-}
-
-.cakes-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.cake-item {
+.tile {
   position: relative;
-  cursor: pointer;
-}
-
-.cake-photo {
-  position: relative;
-  aspect-ratio: 1;
+  border: var(--edge);
   border-radius: 12px;
+  box-shadow: var(--lift);
   overflow: hidden;
-  background: var(--accent);
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  background: var(--card);
 }
-
-.cake-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.2s ease;
-}
-
-.cake-photo:hover img {
-  transform: scale(1.05);
-}
-
-.overlay {
+.tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tile .tag {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-  color: white;
-  padding: 12px 8px 8px;
-  font-weight: 500;
-  font-size: 14px;
+  left: 0; right: 0; bottom: 0;
+  background: var(--cocoa);
+  color: var(--paper);
+  font-family: var(--label);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 6px;
+  text-align: left;
+  padding-left: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-.overlay p {
-  margin: 0;
-}
-
-.decor-badge {
+.tile .dot {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  width: 36px;
-  height: 36px;
+  top: 8px; right: 8px;
+  width: 12px; height: 12px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: var(--butter);
+  border: 2px solid var(--cocoa);
 }
 
-.modal {
+.sheet {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(59, 32, 25, .72);
+  z-index: 40;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  padding: 16px;
-  z-index: 1000;
-  overflow-y: auto;
 }
-
-.modal-content {
-  background: var(--surface);
-  border-radius: 16px;
-  padding: 24px;
-  max-width: 500px;
+.sheet-in {
+  background: var(--card);
+  border-top: var(--edge);
+  border-radius: 18px 18px 0 0;
   width: 100%;
+  max-width: 560px;
+  max-height: 88svh;
+  overflow-y: auto;
+  padding: 20px 18px calc(28px + env(safe-area-inset-bottom));
   position: relative;
 }
-
-.close-btn {
+.x {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 36px;
-  height: 36px;
+  top: 14px; right: 14px;
+  width: 34px; height: 34px;
+  border: var(--edge);
   border-radius: 50%;
-  background: var(--accent);
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: var(--text);
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content h2 {
-  margin: 0 0 16px 0;
-  color: var(--primary);
-  font-size: 22px;
-}
-
-.modal-photos {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.modal-photo h3 {
+  background: var(--paper);
   font-size: 14px;
+  line-height: 1;
+}
+.sheet-name {
+  font-family: var(--display);
+  font-variation-settings: 'WONK' 1;
   font-weight: 600;
-  margin: 0 0 8px 0;
-  color: var(--text);
+  font-size: 27px;
+  color: var(--maroon);
+  margin-bottom: 14px;
+  padding-right: 44px;
 }
-
-.modal-photo img {
+.big {
   width: 100%;
-  border-radius: 8px;
-  max-height: 300px;
-  object-fit: cover;
+  border: var(--edge);
+  border-radius: 12px;
+  display: block;
+  margin: 6px 0 16px;
 }
-
-.suggestions {
-  background: var(--accent);
-  border-radius: 8px;
-  padding: 16px;
-}
-
-.suggestions h3 {
-  margin: 0 0 8px 0;
-  font-size: 16px;
-  color: var(--primary);
-}
-
-.suggestions p {
-  margin: 0;
-  font-size: 14px;
-  color: #666;
-}
-
-@media (max-width: 480px) {
-  .cakes-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .modal-content {
-    padding: 20px;
-  }
-}
+.sheet-in .eyebrow { margin-bottom: 4px; }
