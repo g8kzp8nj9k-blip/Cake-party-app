@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+﻿import React, { useEffect, useRef, useState } from 'react'
 import { supabase, supabaseReady } from '../lib/supabase'
 import { useUserStore } from '../store/userStore'
+import PutMeOnMyCake from './PutMeOnMyCake'
 import './MyCake.css'
 
 const MAX_EDGE = 1400
@@ -78,7 +79,7 @@ export default function MyCake() {
   }
 
   const share = async () => {
-    if (!name.trim()) { setStatus({ bad: true, text: 'Sign the guest book first — your name goes up top.' }); return }
+    if (!name.trim()) { setStatus({ bad: true, text: 'Sign the guest book first â€” your name goes up top.' }); return }
     if (!cake) { setStatus({ bad: true, text: 'Take a photo of your cake first.' }); return }
     if (!supabaseReady) { setStatus({ bad: true, text: 'Not connected to the database yet.' }); return }
 
@@ -156,7 +157,7 @@ export default function MyCake() {
       {status && <div className={'notice' + (status.bad ? ' bad' : '')}>{status.text}</div>}
 
       <button className="btn" onClick={share} disabled={busy === 'upload'}>
-        {busy === 'upload' ? 'Sending…' : row ? 'Replace my cake' : 'Put it on the table'}
+        {busy === 'upload' ? 'Sendingâ€¦' : row ? 'Replace my cake' : 'Put it on the table'}
       </button>
 
       <div className="card">
@@ -165,26 +166,15 @@ export default function MyCake() {
         <h2 className="title">Stuck, or feeling brave?</h2>
         <div className="duo">
           <button className="btn blush" onClick={() => ask('ideas')} disabled={!!busy}>
-            {busy === 'ideas' ? 'Thinking…' : 'Give me ideas'}
+            {busy === 'ideas' ? 'Thinkingâ€¦' : 'Give me ideas'}
           </button>
           <button className="btn ghost" onClick={() => ask('roast')} disabled={!!busy}>
-            {busy === 'roast' ? 'Sharpening…' : 'Roast my cake'}
+            {busy === 'roast' ? 'Sharpeningâ€¦' : 'Roast my cake'}
           </button>
         </div>
       </div>
 
-      {row?.ai_ideas && (
-        <div className="card">
-          <span className="sticker">Ideas</span>
-          <p className="ai">{row.ai_ideas}</p>
-        </div>
-      )}
-      {row?.ai_roast && (
-        <div className="card">
-          <span className="sticker pink">Verdict</span>
-          <p className="ai roast">{row.ai_roast}</p>
-        </div>
-      )}
-    </div>
-  )
+      {cake && <PutMeOnMyCake cake={cake} />}
+ </div>
+ )
 }

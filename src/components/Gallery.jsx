@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react'
+﻿import React, { useEffect, useState, useCallback } from 'react'
 import { supabase, supabaseReady } from '../lib/supabase'
+import FriendshipCake from './FriendshipCake'
 import './Gallery.css'
 
 export default function Gallery() {
@@ -26,7 +27,7 @@ export default function Gallery() {
     return () => window.removeEventListener('keydown', esc)
   }, [])
 
-  if (loading) return <p className="eyebrow">Setting the table…</p>
+  if (loading) return <p className="eyebrow">Setting the tableâ€¦</p>
 
   if (!cakes.length) {
     return (
@@ -54,11 +55,12 @@ export default function Gallery() {
           </button>
         ))}
       </div>
+ <FriendshipCake />
 
-      {open && (
+ {open && (
         <div className="sheet" onClick={() => setOpen(null)}>
           <div className="sheet-in" onClick={(e) => e.stopPropagation()}>
-            <button className="x" onClick={() => setOpen(null)} aria-label="Close">✕</button>
+            <button className="x" onClick={() => setOpen(null)} aria-label="Close">âœ•</button>
             <h3 className="sheet-name">{open.name}</h3>
             <img className="big" src={open.cake_url} alt={`${open.name}'s cake`} />
             {open.decor_url && (

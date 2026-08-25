@@ -1,0 +1,25 @@
+﻿.studio { background: var(--cocoa); border-radius: 18px; padding: 18px 15px; color: var(--paper); }
+.studio-eyebrow { font-family: var(--label); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--butter); margin-bottom: 4px; }
+.studio-title { font-family: var(--display); font-variation-settings: "WONK" 1; font-weight: 600; font-size: 25px; line-height: 1.1; margin-bottom: 16px; }
+.materials { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+.material { border: 2px solid #6B4A3E; border-radius: 12px; padding: 11px; text-align: left; color: var(--paper); display: block; }
+.material.on { border-color: var(--butter); }
+.swatch { display: block; height: 46px; border-radius: 8px; border: 1px solid #6B4A3E; margin-bottom: 8px; }
+.material-name { display: block; font-family: var(--display); font-size: 16px; line-height: 1.1; }
+.material-note { display: block; font-size: 11px; color: #C9AFA6; line-height: 1.35; }
+.selfie-slot { width: 100%; border: 2px dashed #6B4A3E; border-radius: 12px; padding: 13px; margin-top: 12px; display: flex; align-items: center; gap: 11px; color: #C9AFA6; font-size: 13px; text-align: left; }
+.selfie-slot img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--butter); flex: none; }
+.selfie-slot .ring { width: 40px; height: 40px; border-radius: 50%; border: 2px dashed #6B4A3E; flex: none; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 19px; }
+.btn.gold { background: var(--butter); color: var(--cocoa); border: none; box-shadow: none; margin-top: 14px; }
+.btn.quiet { background: var(--card); color: var(--cocoa); flex: none; width: auto; padding-left: 16px; padding-right: 16px; }
+.err { color: #C0392B; font-size: 13px; margin-top: 10px; }
+.studio .err { color: #F0997B; }
+.plate { background: var(--paper); border: 2px solid var(--cocoa); border-radius: 4px; padding: 20px 18px 16px; }
+.plate-no { font-family: var(--label); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 16px; }
+.plate-frame { border: 1px solid var(--cocoa); padding: 7px; background: var(--card); }
+.plate-frame img { width: 100%; display: block; }
+.plate-title { font-family: var(--display); font-variation-settings: "WONK" 1; font-size: 23px; line-height: 1.15; text-align: center; margin: 16px 0 4px; }
+.plate-title em { font-style: italic; }
+.plate-prov { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.5; margin-bottom: 14px; }
+.plate-actions { border-top: 1px solid #C9AFA6; padding-top: 12px; display: flex; gap: 8px; }
+.plate-actions .btn { margin: 0; }

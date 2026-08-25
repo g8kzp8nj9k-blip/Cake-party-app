@@ -1,0 +1,19 @@
+﻿.finale { background: var(--cocoa); border-radius: 18px; padding: 30px 18px; color: var(--paper); text-align: center; min-height: 260px; display: flex; flex-direction: column; justify-content: center; }
+.finale.idle { text-align: left; min-height: 0; padding: 20px 16px; }
+.finale-line { font-family: var(--display); font-size: 21px; line-height: 1.5; opacity: 0; transition: opacity .9s ease; }
+.finale-line.in { opacity: 1; }
+.finale-rule { width: 1px; height: 26px; background: #6B4A3E; margin: 14px auto; }
+.finale-tag { font-family: var(--label); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--butter); opacity: 0; transition: opacity .9s ease; }
+.finale-tag.in { opacity: 1; }
+.finale-eyebrow { font-family: var(--label); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--butter); }
+.finale-head { font-family: var(--display); font-variation-settings: "WONK" 1; font-size: 25px; line-height: 1.1; margin: 4px 0 6px; }
+.finale-note { font-size: 13px; color: #C9AFA6; line-height: 1.5; margin-bottom: 14px; }
+.finale .err { color: #F0997B; }
+.fc-title { font-family: var(--display); font-variation-settings: "WONK" 1; font-size: 27px; line-height: 1.02; text-align: center; margin: 15px 0 4px; }
+.fc-sub { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 14px; }
+.fc-list { border-top: 1px solid #DCC4BA; }
+.fc-row { display: flex; align-items: center; gap: 9px; padding: 6px 0; border-bottom: 1px dashed #E2CCC3; }
+.fc-dot { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--cocoa); background: var(--blush); flex: none; }
+.fc-el { font-size: 12px; flex: 1; }
+.fc-name { font-family: var(--label); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.fc-more { display: block; width: 100%; font-family: var(--label); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 11px 0 0; }
