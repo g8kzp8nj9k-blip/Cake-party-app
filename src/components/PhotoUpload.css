@@ -1,0 +1,135 @@
+.photo-upload {
+  padding: 16px;
+}
+
+.photo-upload h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+
+.photo-upload .subtitle {
+  color: #666;
+  margin: 0;
+}
+
+.photo-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.photo-area {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+}
+
+.photo-area h3 {
+  font-size: 14px;
+  margin: 0 0 12px 0;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.photo-btn {
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: var(--accent);
+  border: 2px dashed var(--border);
+  color: var(--text);
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.photo-btn:hover {
+  border-color: var(--primary);
+  background: white;
+}
+
+.photo-btn.secondary {
+  opacity: 0.6;
+  font-size: 20px;
+}
+
+.photo-preview {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.change-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 0;
+  font-size: 12px;
+  margin: 0;
+}
+
+.message {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.message.success {
+  background: #d4f1d4;
+  color: #2d652d;
+}
+
+.message.error {
+  background: #f1d4d4;
+  color: #652d2d;
+}
+
+.upload-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.upload-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tip {
+  padding: 12px;
+  background: var(--accent);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .photo-section {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
