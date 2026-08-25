@@ -217,3 +217,10 @@ footer.rule {
   text-align: center;
   padding: 4px 0 14px;
 }
+
+.gb-row { display: flex; align-items: center; gap: 12px; }
+.gb-row input { flex: 1; min-width: 0; background: transparent; border: none; border-bottom: var(--edge); padding: 4px 0 8px; font-family: var(--display); font-variation-settings: "WONK" 1; font-size: 26px; font-weight: 500; }
+.gb-row input::placeholder { color: #C9AFA6; font-style: italic; }
+.gb-selfie { width: 52px; height: 52px; flex: none; border-radius: 50%; border: var(--edge); overflow: hidden; background: var(--card); display: flex; align-items: center; justify-content: center; padding: 0; }
+.gb-selfie img { width: 100%; height: 100%; object-fit: cover; }
+.gb-plus { font-family: var(--display); font-size: 24px; color: var(--maroon); line-height: 1; }
