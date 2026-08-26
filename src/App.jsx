@@ -1,23 +1,39 @@
-﻿import React, { useRef, useState } from "react"
+﻿import React, { useEffect, useRef, useState } from "react"
 import { useUserStore } from "./store/userStore"
 import { squash } from "./lib/photo"
 import { supabase, supabaseReady } from "./lib/supabase"
 import Census from "./components/Census"
 import MyCake from "./components/MyCake"
 import Gallery from "./components/Gallery"
+import CameraRoll from "./components/CameraRoll"
+import Zine from "./components/Zine"
 import "./App.css"
 
 const TABS = [
-{ id: "questions", label: "Census" },
-{ id: "cake", label: "My cake" },
-{ id: "gallery", label: "The table" }
+{ id: "census", label: "Census" },
+{ id: "cake", label: "Cake" },
+{ id: "table", label: "Table" },
+{ id: "roll", label: "Photos" },
+{ id: "zine", label: "Zine" }
 ]
 
 export default function App() {
-const [tab, setTab] = useState("questions")
+const [tab, setTab] = useState(() => (window.location.hash || "#census").slice(1))
 const { name, setName, selfie, setSelfie, guestId } = useUserStore()
 const [draft, setDraft] = useState(name)
 const input = useRef(null)
+
+useEffect(() => {
+const onPop = () => setTab((window.location.hash || "#census").slice(1))
+window.addEventListener("popstate", onPop)
+return () => window.removeEventListener("popstate", onPop)
+}, [])
+
+const go = (id) => {
+if (id === tab) return
+window.history.pushState(null, "", "#" + id)
+setTab(id)
+}
 
 const commit = () => setName(draft)
 
@@ -67,16 +83,18 @@ onChange={(e) => { const f = e.target.files && e.target.files[0]; if (f) takeSel
 </div>
 
 <main>
-{tab === "questions" && <Census />}
+{tab === "census" && <Census />}
 {tab === "cake" && <MyCake />}
-{tab === "gallery" && <Gallery />}
+{tab === "table" && <Gallery />}
+{tab === "roll" && <CameraRoll />}
+{tab === "zine" && <Zine />}
 </main>
 
 <footer className="rule">Bring your favourite bottle</footer>
 
-<nav className="nav">
+<nav className="nav five">
 {TABS.map((t) => (
-<button key={t.id} className={tab === t.id ? "on" : ""} onClick={() => setTab(t.id)}>{t.label}</button>
+<button key={t.id} className={tab === t.id ? "on" : ""} onClick={() => go(t.id)}>{t.label}</button>
 ))}
 </nav>
 </div>

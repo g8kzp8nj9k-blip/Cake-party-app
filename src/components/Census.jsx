@@ -3,6 +3,7 @@ import { supabase, supabaseReady } from "../lib/supabase"
 import { useUserStore } from "../store/userStore"
 import { CENSUS } from "../data/census"
 import Reveal from "./Reveal"
+import Missions from "./Missions"
 import "./Census.css"
 
 export default function Census() {

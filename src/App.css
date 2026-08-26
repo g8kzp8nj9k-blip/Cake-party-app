@@ -224,3 +224,21 @@ footer.rule {
 .gb-selfie { width: 52px; height: 52px; flex: none; border-radius: 50%; border: var(--edge); overflow: hidden; background: var(--card); display: flex; align-items: center; justify-content: center; padding: 0; }
 .gb-selfie img { width: 100%; height: 100%; object-fit: cover; }
 .gb-plus { font-family: var(--display); font-size: 24px; color: var(--maroon); line-height: 1; }
+
+body { font-size: 15px; }
+.masthead h1 { font-size: clamp(32px, 10vw, 42px); }
+.masthead { padding: 16px 20px 12px; }
+h2.title { font-size: 21px; }
+.lede { font-size: 14px; }
+.card { padding: 15px; }
+.gb-row input { font-size: 21px; }
+.gb-selfie { width: 46px; height: 46px; }
+.q-ask { font-size: 18px; }
+.chip { font-size: 13px; padding: 8px 13px; }
+.q-free { font-size: 17px; }
+.rv-verdict { font-size: 26px; }
+.rv-person { font-size: 18px; }
+.rv-opinion { font-size: 17px; }
+.rv-line { font-size: 12px; }
+.nav.five { grid-template-columns: repeat(5, 1fr); }
+.nav.five button { font-size: 9px; letter-spacing: .06em; padding: 12px 1px 14px; }

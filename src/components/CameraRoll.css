@@ -1,0 +1,6 @@
+﻿.roll { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+.roll-tile { aspect-ratio: 1; border: var(--edge); overflow: hidden; padding: 0; background: var(--card); }
+.roll-tile:nth-child(3n+1) { transform: rotate(-1deg); }
+.roll-tile:nth-child(3n) { transform: rotate(1deg); }
+.roll-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.btn.danger { color: #A32D2D; border-color: #A32D2D; margin-top: 12px; }
