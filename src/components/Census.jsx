@@ -22,15 +22,10 @@ const own = (data || []).find((r) => r.guest_id === guestId)
 if (own && own.responses && Object.keys(own.responses).length) {
 setMine(own.responses)
 setSaved(true)
-setShowReveal(true)
 }
 }, [guestId])
 
-useEffect(() => {
-load()
-const t = setInterval(load, 6000)
-return () => clearInterval(t)
-}, [load])
+useEffect(() => { load(); const t = setInterval(load, 6000); return () => clearInterval(t) }, [load])
 
 const pick = (id, val) => { setMine((m) => ({ ...m, [id]: val })); setSaved(false) }
 
@@ -44,15 +39,28 @@ const { error } = await supabase.from("answers").upsert(
 if (error) { setStatus({ bad: true, text: error.message }); return }
 setSaved(true)
 setStatus(null)
-setShowReveal(true)
 load()
 }
 
 const others = everyone.filter((r) => r.guest_id !== guestId)
 const done = CENSUS.filter((q) => mine[q.id] !== undefined && mine[q.id] !== "").length
 
-if (showReveal && saved) {
-return <Reveal rows={everyone} onEdit={() => setShowReveal(false)} />
+if (showReveal) return <Reveal rows={everyone} onEdit={() => setShowReveal(false)} />
+
+if (saved) {
+return (
+<div className="stack">
+<div className="card">
+<span className="sticker">In</span>
+<p className="eyebrow">Your answers are pinned up</p>
+<h2 className="title">That is you, on the record</h2>
+<p className="lede">{others.length === 0 ? "You are the first one in. Your card fills out as others answer." : others.length + (others.length === 1 ? " other person has" : " others have") + " answered so far."}</p>
+</div>
+<button className="btn" onClick={() => setShowReveal(true)}>Reveal my card</button>
+<button className="rv-edit" onClick={() => setSaved(false)}>Change my answers</button>
+<Missions />
+</div>
+)
 }
 
 return (
@@ -106,7 +114,7 @@ onClick={() => pick(q.id, o)}>{o}</button>
 
 {status && <div className={"notice" + (status.bad ? " bad" : "")}>{status.text}</div>}
 
-<button className="btn" onClick={submit}>{saved ? "Update my answers" : "Pin up my answers"}</button>
+<button className="btn" onClick={submit}>Pin up my answers</button>
 </div>
 )
 }
