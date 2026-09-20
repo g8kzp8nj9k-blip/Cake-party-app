@@ -12,8 +12,8 @@ import "./App.css"
 const TITLES = { census: "The questionnaire", cake: "Your cake", photos: "Photos", zine: "The issue", missions: "Secret missions" }
 
 export default function App() {
-  const { name } = useUserStore()
-  const [entered, setEntered] = useState(Boolean(name))
+  const { name, selfie } = useUserStore()
+  const [entered, setEntered] = useState(Boolean(name) && Boolean(selfie))
   const [view, setView] = useState(() => (window.location.hash || "#index").slice(1))
 
   useEffect(() => {
