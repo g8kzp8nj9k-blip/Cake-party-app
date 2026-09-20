@@ -51,3 +51,9 @@ main { padding: 0 !important; }
 .z-page, .z-cover, .z-classified { break-inside: avoid; page-break-inside: avoid; }
 .z-cover { break-after: page; page-break-after: always; }
 }
+.z-wait { background: var(--cocoa); border-radius: 18px; padding: 40px 18px; color: var(--paper); text-align: center; min-height: 300px; display: flex; flex-direction: column; justify-content: center; }
+.z-wait-line { font-family: var(--display); font-size: 21px; line-height: 1.5; opacity: 0; transition: opacity .9s ease; }
+.z-wait-line.in { opacity: 1; }
+.z-wait-rule { width: 1px; height: 26px; background: #6B4A3E; margin: 14px auto; }
+.z-wait-tag { font-family: var(--label); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--butter); opacity: 0; transition: opacity .9s ease; }
+.z-wait-tag.in { opacity: 1; }

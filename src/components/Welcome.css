@@ -1,0 +1,15 @@
+﻿.welcome { min-height: 100svh; background: var(--paper); display: flex; flex-direction: column; }
+.wl-ticker { background: var(--maroon); color: var(--paper); font-family: var(--label); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; padding: 7px 16px; padding-top: calc(7px + env(safe-area-inset-top)); display: flex; justify-content: space-between; }
+.wl-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 24px calc(28px + env(safe-area-inset-bottom)); text-align: center; max-width: 420px; margin: 0 auto; width: 100%; }
+.wl-title { font-family: var(--display); font-variation-settings: "SOFT" 60, "WONK" 1; font-weight: 700; font-size: clamp(38px, 13vw, 52px); line-height: .92; color: var(--maroon); }
+.wl-title em { font-style: italic; display: block; color: var(--cocoa); }
+.wl-sub { font-family: var(--label); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 10px 0 32px; }
+.wl-selfie { width: 116px; height: 116px; border-radius: 50%; border: 2px dashed #C9AFA6; overflow: hidden; background: var(--card); display: flex; align-items: center; justify-content: center; padding: 0; }
+.wl-selfie img { width: 100%; height: 100%; object-fit: cover; }
+.wl-plus { font-family: var(--display); font-size: 40px; color: var(--maroon); line-height: 1; }
+.wl-hint { font-family: var(--label); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 10px 0 28px; }
+.wl-label { font-family: var(--label); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); align-self: flex-start; }
+.wl-name { width: 100%; background: transparent; border: none; border-bottom: var(--edge); padding: 6px 0 10px; margin-bottom: 24px; font-family: var(--display); font-variation-settings: "WONK" 1; font-size: 26px; text-align: left; }
+.wl-name::placeholder { color: #C9AFA6; font-style: italic; }
+.wl-err { font-size: 13px; color: #A32D2D; margin-bottom: 12px; }
+.wl-go { width: 100%; }

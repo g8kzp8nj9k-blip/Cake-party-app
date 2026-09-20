@@ -1,102 +1,66 @@
-﻿import React, { useEffect, useRef, useState } from "react"
+﻿import React, { useEffect, useState } from "react"
 import { useUserStore } from "./store/userStore"
-import { squash } from "./lib/photo"
-import { supabase, supabaseReady } from "./lib/supabase"
+import Welcome from "./components/Welcome"
+import Index from "./components/Index"
 import Census from "./components/Census"
-import MyCake from "./components/MyCake"
-import Gallery from "./components/Gallery"
+import CakeStudio from "./components/CakeStudio"
 import CameraRoll from "./components/CameraRoll"
 import Zine from "./components/Zine"
+import MissionFloat from "./components/MissionFloat"
 import "./App.css"
 
-const TABS = [
-{ id: "census", label: "Census" },
-{ id: "cake", label: "Cake" },
-{ id: "table", label: "Table" },
-{ id: "roll", label: "Photos" },
-{ id: "zine", label: "Zine" }
-]
+const TITLES = {
+  census: "The questionnaire",
+  cake: "Your cake",
+  photos: "Photos",
+  zine: "The issue"
+}
 
 export default function App() {
-const [tab, setTab] = useState(() => (window.location.hash || "#census").slice(1))
-const { name, setName, selfie, setSelfie, guestId } = useUserStore()
-const [draft, setDraft] = useState(name)
-const input = useRef(null)
+  const { name } = useUserStore()
+  const [entered, setEntered] = useState(Boolean(name))
+  const [view, setView] = useState(() => (window.location.hash || "#index").slice(1))
 
-useEffect(() => {
-const onPop = () => setTab((window.location.hash || "#census").slice(1))
-window.addEventListener("popstate", onPop)
-return () => window.removeEventListener("popstate", onPop)
-}, [])
+  useEffect(() => {
+    const onPop = () => setView((window.location.hash || "#index").slice(1))
+    window.addEventListener("popstate", onPop)
+    return () => window.removeEventListener("popstate", onPop)
+  }, [])
 
-const go = (id) => {
-if (id === tab) return
-window.history.pushState(null, "", "#" + id)
-setTab(id)
-}
+  const go = (id) => {
+    window.history.pushState(null, "", "#" + id)
+    setView(id)
+  }
+  const back = () => window.history.back()
 
-const commit = () => setName(draft)
+  if (!entered) return <Welcome onDone={() => { setEntered(true); go("index") }} />
 
-const takeSelfie = async (file) => {
-try {
-const shot = await squash(file, 500, 0.8)
-setSelfie(shot.preview)
-if (supabaseReady && draft.trim()) {
-const path = guestId + "/selfie.jpg"
-const up = await supabase.storage.from("cakes").upload(path, shot.blob, { contentType: "image/jpeg", upsert: true })
-if (!up.error) {
-const url = supabase.storage.from("cakes").getPublicUrl(path).data.publicUrl + "?v=" + Date.now()
-setSelfie(url)
-await supabase.from("answers").upsert(
-{ guest_id: guestId, name: draft.trim(), selfie_url: url, updated_at: new Date().toISOString() },
-{ onConflict: "guest_id" }
-)
-}
-}
-} catch (e) {}
-}
+  const atIndex = view === "index" || !TITLES[view]
 
-return (
-<div className="app">
-<div className="ticker">
-<span>No. 01 &middot; Mini cakes</span>
-<span>Not a competition</span>
-</div>
+  return (
+    <div className="app">
+      <div className="ticker">
+        {atIndex
+          ? <><span>No. 01 &middot; Mini cakes</span><span>Not a competition</span></>
+          : <><button className="tk-back" onClick={back}>&larr; Back</button><span>{TITLES[view]}</span></>}
+      </div>
 
-<header className="masthead">
-<h1>Cake<em>Party</em></h1>
-<p>We meet &middot; we hang &middot; we decorate</p>
-</header>
+      {atIndex && (
+        <header className="masthead">
+          <h1>Cake<em>Party</em></h1>
+          <p>We meet &middot; we hang &middot; we decorate</p>
+        </header>
+      )}
 
-<div className="guestbook">
-<label htmlFor="guest">Sign the guest book</label>
-<div className="gb-row">
-<button className="gb-selfie" onClick={() => input.current && input.current.click()} aria-label="Add a selfie">
-{selfie ? <img src={selfie} alt="You" /> : <span className="gb-plus">+</span>}
-</button>
-<input id="guest" value={draft} placeholder="your name" maxLength={30}
-onChange={(e) => setDraft(e.target.value)} onBlur={commit}
-onKeyDown={(e) => { if (e.key === "Enter") { commit(); e.currentTarget.blur() } }} />
-</div>
-<input ref={input} type="file" accept="image/*" hidden
-onChange={(e) => { const f = e.target.files && e.target.files[0]; if (f) takeSelfie(f); e.target.value = "" }} />
-</div>
+      <main>
+        {atIndex && <Index go={go} />}
+        {view === "census" && <Census />}
+        {view === "cake" && <CakeStudio />}
+        {view === "photos" && <CameraRoll />}
+        {view === "zine" && <Zine />}
+      </main>
 
-<main>
-{tab === "census" && <Census />}
-{tab === "cake" && <MyCake />}
-{tab === "table" && <Gallery />}
-{tab === "roll" && <CameraRoll />}
-{tab === "zine" && <Zine />}
-</main>
-
-<footer className="rule">Bring your favourite bottle</footer>
-
-<nav className="nav five">
-{TABS.map((t) => (
-<button key={t.id} className={tab === t.id ? "on" : ""} onClick={() => go(t.id)}>{t.label}</button>
-))}
-</nav>
-</div>
-)
+      <MissionFloat />
+    </div>
+  )
 }
