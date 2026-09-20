@@ -1,0 +1,20 @@
+﻿export const PAIRS = [
+  { easy: "Get someone to compliment your cake without asking what they think.",
+    medium: "Get someone to believe a made-up harmless fact for at least 30 seconds." },
+  { easy: "Get someone to say wait, what?",
+    medium: "Get someone to make or bring you a drink without directly asking." },
+  { easy: "Get someone to offer you a bite of their food without asking.",
+    medium: "Get someone to tell you something about themselves that nobody else at the table knew." },
+  { easy: "Get someone else to suggest taking a group photo.",
+    medium: "Get someone to Google something because of a conversation you started." },
+  { easy: "Get someone to recommend a restaurant without asking them for a recommendation.",
+    medium: "Get someone to help with your cake without directly asking for help." },
+  { easy: "Get someone to say that is actually crazy.",
+    medium: "Make up a nickname for something at the party and get someone else to use it later." },
+  { easy: "Get two people to disagree about a topic you introduce.",
+    medium: "Get someone to change something on their cake because of something you said, without directly telling them to." },
+  { easy: "Get someone to tell a childhood story without directly asking about their childhood.",
+    medium: "State a harmless opinion someone initially disagrees with and get them to come around to your side." },
+  { easy: "Get someone to ask to use one of your cake decorations or tools.",
+    medium: "Casually introduce an unusual word or phrase and get someone else to use it later." }
+]

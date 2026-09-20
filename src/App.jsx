@@ -6,15 +6,10 @@ import Census from "./components/Census"
 import CakeStudio from "./components/CakeStudio"
 import CameraRoll from "./components/CameraRoll"
 import Zine from "./components/Zine"
-import MissionFloat from "./components/MissionFloat"
+import Missions from "./components/Missions"
 import "./App.css"
 
-const TITLES = {
-  census: "The questionnaire",
-  cake: "Your cake",
-  photos: "Photos",
-  zine: "The issue"
-}
+const TITLES = { census: "The questionnaire", cake: "Your cake", photos: "Photos", zine: "The issue", missions: "Secret missions" }
 
 export default function App() {
   const { name } = useUserStore()
@@ -27,10 +22,7 @@ export default function App() {
     return () => window.removeEventListener("popstate", onPop)
   }, [])
 
-  const go = (id) => {
-    window.history.pushState(null, "", "#" + id)
-    setView(id)
-  }
+  const go = (id) => { window.history.pushState(null, "", "#" + id); setView(id) }
   const back = () => window.history.back()
 
   if (!entered) return <Welcome onDone={() => { setEntered(true); go("index") }} />
@@ -44,23 +36,20 @@ export default function App() {
           ? <><span>No. 01 &middot; Mini cakes</span><span>Not a competition</span></>
           : <><button className="tk-back" onClick={back}>&larr; Back</button><span>{TITLES[view]}</span></>}
       </div>
-
       {atIndex && (
         <header className="masthead">
           <h1>Cake<em>Party</em></h1>
           <p>We meet &middot; we hang &middot; we decorate</p>
         </header>
       )}
-
       <main>
         {atIndex && <Index go={go} />}
-        {view === "census" && <Census />}
+        {view === "census" && <Census go={go} />}
         {view === "cake" && <CakeStudio />}
         {view === "photos" && <CameraRoll />}
+        {view === "missions" && <Missions back={back} />}
         {view === "zine" && <Zine />}
       </main>
-
-      <MissionFloat />
     </div>
   )
 }

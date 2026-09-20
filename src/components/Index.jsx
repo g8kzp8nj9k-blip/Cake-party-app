@@ -6,7 +6,8 @@ import "./Index.css"
 const ITEMS = [
   { id: "census", no: "01", title: "Fill the questionnaire", note: "Fourteen questions. Then your card." },
   { id: "cake",   no: "02", title: "Experiment with your cake", note: "Put a tiny you on top of it." },
-  { id: "photos", no: "03", title: "Add photos", note: "Anything, all evening." }
+  { id: "photos", no: "03", title: "Add photos", note: "Anything, all evening." },
+  { id: "missions", no: "04", title: "Secret missions", note: "Two jobs. Choose your risk." }
 ]
 
 export default function Index({ go }) {

@@ -5,7 +5,7 @@ import { CENSUS } from "../data/census"
 import Reveal from "./Reveal"
 import "./Census.css"
 
-export default function Census() {
+export default function Census({ go }) {
   const { guestId, name } = useUserStore()
   const [mine, setMine] = useState({})
   const [everyone, setEveryone] = useState([])
@@ -32,7 +32,7 @@ export default function Census() {
       { onConflict: "guest_id" }
     )
     if (error) { setStatus({ bad: true, text: error.message }); return }
-    setSaved(true); setStatus(null); load()
+    setSaved(true); setStatus({ text: "Thank you. That is you, on the record." }); load(); if (go) setTimeout(function(){ go("index") }, 1400)
   }
 
   const others = everyone.filter((r) => r.guest_id !== guestId)
