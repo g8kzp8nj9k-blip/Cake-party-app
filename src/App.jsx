@@ -7,9 +7,10 @@ import CakeStudio from "./components/CakeStudio"
 import CameraRoll from "./components/CameraRoll"
 import Zine from "./components/Zine"
 import Missions from "./components/Missions"
+import Results from "./components/Results"
 import "./App.css"
 
-const TITLES = { census: "The questionnaire", cake: "Your cake", photos: "Photos", zine: "The issue", missions: "Secret missions" }
+const TITLES = { census: "The questionnaire", cake: "Your cake", photos: "Photos", zine: "The issue", results: "Your results", missions: "Secret missions" }
 
 export default function App() {
   const { name, selfie } = useUserStore()
@@ -48,6 +49,7 @@ export default function App() {
         {view === "cake" && <CakeStudio />}
         {view === "photos" && <CameraRoll />}
         {view === "missions" && <Missions back={back} />}
+        {view === "results" && <Results />}
         {view === "zine" && <Zine />}
       </main>
     </div>

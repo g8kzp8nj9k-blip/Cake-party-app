@@ -3,6 +3,7 @@ import { supabase, supabaseReady } from "../lib/supabase"
 import { useUserStore } from "../store/userStore"
 import { CENSUS } from "../data/census"
 import Reveal from "./Reveal"
+import { GUESTS } from "../data/guests"
 import "./Census.css"
 
 export default function Census({ go }) {
@@ -76,10 +77,7 @@ export default function Census({ go }) {
           )}
           {q.people && (
             <div className="q-opts">
-              {others.length === 0 && <p className="lede">Nobody else has signed in yet. Come back later.</p>}
-              {others.map((r) => (
-                <button key={r.guest_id} className={"chip" + (mine[q.id] === r.name ? " on" : "")} onClick={() => pick(q.id, r.name)}>{r.name}</button>
-              ))}
+              {GUESTS.filter(function(g){ return g !== name }).map(function(g){ return <button key={g} className={"chip" + (mine[q.id] === g ? " on" : "")} onClick={function(){ pick(q.id, g) }}>{g}</button> })}
             </div>
           )}
           {q.free && (

@@ -1,0 +1,17 @@
+﻿.rs-f { border-radius: 50%; border: var(--edge); object-fit: cover; background: var(--blush); display: inline-flex; align-items: center; justify-content: center; font-family: var(--display); color: #72243E; flex: none; }
+.rs-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rs-card { background: var(--card); border: var(--edge); border-radius: 14px; box-shadow: var(--lift); padding: 14px 10px; text-align: center; }
+.rs-l { font-family: var(--label); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+.rs-n { font-family: var(--display); font-size: 19px; line-height: 1.1; }
+.rs-p { font-size: 13px; color: var(--maroon); }
+.rs-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px dashed #E2CCC3; }
+.rs-rn { font-size: 13px; width: 62px; flex: none; }
+.rs-bar { flex: 1; height: 9px; background: #EBD5CC; border-radius: 5px; overflow: hidden; }
+.rs-bar span { display: block; height: 9px; background: var(--maroon); }
+.rs-pc { font-family: var(--label); font-size: 10px; color: var(--muted); width: 30px; text-align: right; }
+.rs-out { background: var(--cocoa); border-radius: 14px; padding: 16px 14px; color: var(--paper); }
+.rs-ol { font-family: var(--label); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--butter); margin-bottom: 12px; }
+.rs-oi { border-top: 1px solid #6B4A3E; padding-top: 10px; margin-bottom: 10px; }
+.rs-oq { font-size: 12px; color: #C9AFA6; }
+.rs-oa { font-family: var(--display); font-size: 18px; line-height: 1.25; margin: 2px 0; }
+.rs-oc { font-family: var(--label); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--butter); }

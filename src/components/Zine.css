@@ -57,3 +57,33 @@ main { padding: 0 !important; }
 .z-wait-rule { width: 1px; height: 26px; background: #6B4A3E; margin: 14px auto; }
 .z-wait-tag { font-family: var(--label); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--butter); opacity: 0; transition: opacity .9s ease; }
 .z-wait-tag.in { opacity: 1; }
+.zf { border-radius: 50%; border: 1px solid var(--cocoa); object-fit: cover; background: var(--blush); display: inline-flex; align-items: center; justify-content: center; font-family: var(--display); color: #72243E; flex: none; }
+.z-page.center { text-align: center; }
+.z-deb { margin-bottom: 18px; }
+.z-deb-q { font-family: var(--display); font-size: 19px; line-height: 1.15; margin-bottom: 9px; }
+.z-deb-bar { display: flex; height: 46px; border: 1px solid var(--cocoa); }
+.z-seg { display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 18px; border-right: 1px solid var(--cocoa); }
+.z-seg:last-child { border-right: none; }
+.z-seg.s0 { background: var(--maroon); color: var(--paper); }
+.z-seg.s1 { background: var(--blush); }
+.z-seg.s2 { background: var(--card); }
+.z-deb-lab { display: flex; justify-content: space-between; font-family: var(--label); font-size: 9px; text-transform: uppercase; color: var(--muted); margin-top: 5px; gap: 6px; }
+.z-lone { background: var(--cocoa); color: var(--paper); padding: 20px 14px; text-align: center; }
+.z-lone-i { border-top: 1px solid #6B4A3E; padding-top: 14px; margin-top: 14px; }
+.z-lone-i:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+.z-lone-t { font-family: var(--display); font-size: 21px; line-height: 1.25; margin: 9px 0 4px; }
+.z-lone-t em { font-style: italic; color: var(--butter); }
+.z-lone-s { font-size: 12px; color: #C9AFA6; }
+.z-dinner { padding: 8px 0 4px; }
+.z-dn { font-family: var(--display); line-height: 1.45; }
+.z-dn.n0 { font-size: 25px; }
+.z-dn.n1 { font-size: 19px; color: var(--maroon); }
+.z-dn.n2 { font-size: 22px; font-style: italic; }
+.z-dn.n3 { font-size: 17px; color: var(--muted); }
+.z-cap { font-size: 12px; color: var(--muted); margin-top: 10px; }
+.z-rest { font-family: var(--display); font-size: 16px; flex: 1; }
+.z-big-cake { margin-bottom: 14px; }
+.z-big-cake img { width: 100%; border: 1px solid var(--cocoa); display: block; }
+.z-bc-n { font-family: var(--label); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+.z-lb { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed #6B4A3E; font-family: var(--display); font-size: 17px; }
+.z-sc { font-family: var(--label); color: var(--butter); }
